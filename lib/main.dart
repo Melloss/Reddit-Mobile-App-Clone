@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import './Views/home.dart';
+import './Helper/colorPallets.dart';
 
-class App extends StatelessWidget {
+class App extends StatelessWidget with ColorPallets {
   const App({super.key});
 
   @override
@@ -9,13 +10,18 @@ class App extends StatelessWidget {
     return MaterialApp(
       home: const Home(),
       theme: ThemeData.light().copyWith(
+        scaffoldBackgroundColor: const Color(0xFFF2F3F5),
         appBarTheme: const AppBarTheme(
           backgroundColor: Color(0xFFFFFFFF),
-          iconTheme: IconThemeData(color: Color(0xFF0A0A0A)),
-          elevation: 1,
+          iconTheme: IconThemeData(color: ColorPallets.iconColor),
+          elevation: 2,
         ),
+        textTheme: const TextTheme(
+            bodyMedium: TextStyle(
+          color: Colors.black,
+          fontSize: 15,
+        )),
         primaryColor: Colors.white,
-        iconTheme: const IconThemeData(color: Colors.black),
       ),
     );
   }
