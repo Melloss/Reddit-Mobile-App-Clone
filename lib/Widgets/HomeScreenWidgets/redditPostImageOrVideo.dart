@@ -8,9 +8,8 @@ class RedditPostImageOrVideo extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(30),
       child: Container(
-        margin: const EdgeInsets.all(8),
-        width: double.infinity,
         height: 450,
+        margin: const EdgeInsets.all(8),
         decoration: BoxDecoration(
             image: const DecorationImage(
                 image: AssetImage('assets/donkey.png'), fit: BoxFit.cover),

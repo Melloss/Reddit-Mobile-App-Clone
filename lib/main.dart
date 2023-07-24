@@ -21,7 +21,6 @@ class App extends StatelessWidget with ColorPallets {
           color: Colors.black,
           fontSize: 15,
         )),
-        primaryColor: Colors.white,
       ),
     );
   }

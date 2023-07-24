@@ -79,11 +79,14 @@ class _RedditPostHeaderState extends State<RedditPostHeader> {
           maxRadius: 13,
           backgroundImage: AssetImage("assets/donkey.png"),
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.0),
-          child: Text(
-            "r/Donkey",
-            style: TextStyle(fontSize: 13),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: TextButton(
+            onPressed: gotoCommunityDetail,
+            child: const Text(
+              "r/Donkey",
+              style: TextStyle(fontSize: 13, color: Colors.black),
+            ),
           ),
         ),
         Text(
@@ -115,23 +118,22 @@ class _RedditPostHeaderState extends State<RedditPostHeader> {
   }
 
   _buildCheckedLogo() {
-    return SizedBox(
-      width: 33,
-      child: Container(
-          padding: const EdgeInsets.all(1.5),
+    return Container(
+        width: 33,
+        margin: const EdgeInsets.only(right: 5),
+        padding: const EdgeInsets.all(1.5),
+        decoration: BoxDecoration(
+            color: ColorPallets.buttonBackgroundColor,
+            borderRadius: BorderRadius.circular(30)),
+        child: Container(
           decoration: BoxDecoration(
-              color: ColorPallets.buttonBackgroundColor,
-              borderRadius: BorderRadius.circular(30)),
-          child: Container(
-            decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(30)),
-            child: const Icon(
-              Icons.check,
-              color: ColorPallets.iconColor,
-              size: 20,
-            ),
-          )),
-    );
+              color: Colors.white, borderRadius: BorderRadius.circular(30)),
+          child: const Icon(
+            Icons.check,
+            color: ColorPallets.iconColor,
+            size: 20,
+          ),
+        ));
   }
 
   _joinButtonClickHandler() {
@@ -139,5 +141,9 @@ class _RedditPostHeaderState extends State<RedditPostHeader> {
     setState(() {
       isJoinClicked = isJoinClicked;
     });
+  }
+
+  gotoCommunityDetail() {
+    //print("community is clicked");
   }
 }

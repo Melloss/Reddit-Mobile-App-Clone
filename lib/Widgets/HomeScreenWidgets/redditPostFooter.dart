@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../Helper/colorPallets.dart';
+import 'dart:math' as Math;
 
 class RedditPostFooter extends StatefulWidget with ColorPallets {
   const RedditPostFooter({super.key});
@@ -9,57 +10,74 @@ class RedditPostFooter extends StatefulWidget with ColorPallets {
 }
 
 class _RedditPostFooterState extends State<RedditPostFooter> {
+  int vote = 615;
+
+  void voteUpHandler() {
+    setState(() {
+      vote++;
+    });
+  }
+
+  void voteDownHandler() {
+    setState(() {
+      vote--;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(right: 0),
-      child: Row(
-        children: [
-          IconButton(
+    return Row(
+      children: [
+        Transform.rotate(
+          angle: Math.pi * -0.5,
+          child: IconButton(
             icon: const Icon(
-              Icons.arrow_upward_outlined,
+              Icons.forward_outlined,
               color: ColorPallets.smallTextColor,
             ),
-            onPressed: () {},
+            onPressed: voteUpHandler,
           ),
-          const Text(
-            "615",
-            style: TextStyle(color: ColorPallets.smallTextColor),
-          ),
-          IconButton(
-            icon: const Icon(
-              Icons.arrow_downward_outlined,
+        ),
+        Text(
+          vote.toString(),
+          style: const TextStyle(color: ColorPallets.smallTextColor),
+        ),
+        IconButton(
+          icon: Transform.rotate(
+            angle: Math.pi * 0.5,
+            child: const Icon(
+              Icons.forward_outlined,
               color: ColorPallets.smallTextColor,
             ),
-            onPressed: () {},
           ),
-          Expanded(child: Container()),
-          IconButton(
-            icon: const Icon(
-              Icons.message_outlined,
-              color: ColorPallets.smallTextColor,
-            ),
-            onPressed: () {},
+          onPressed: voteDownHandler,
+        ),
+        Expanded(child: Container()),
+        IconButton(
+          icon: const Icon(
+            Icons.message_outlined,
+            color: ColorPallets.smallTextColor,
           ),
-          const Text(
-            "68",
-            style: TextStyle(color: ColorPallets.smallTextColor),
+          onPressed: () {},
+        ),
+        const Text(
+          "68",
+          style: TextStyle(color: ColorPallets.smallTextColor),
+        ),
+        Expanded(child: Container()),
+        IconButton(
+          icon: const Icon(
+            Icons.share_outlined,
+            color: ColorPallets.smallTextColor,
           ),
-          Expanded(child: Container()),
-          IconButton(
-            icon: const Icon(
-              Icons.share_outlined,
-              color: ColorPallets.smallTextColor,
-            ),
-            onPressed: () {},
-          ),
-          const Text(
-            "117",
-            style: TextStyle(color: ColorPallets.smallTextColor),
-          ),
-          Expanded(child: Container()),
-        ],
-      ),
+          onPressed: () {},
+        ),
+        const Text(
+          "117",
+          style: TextStyle(color: ColorPallets.smallTextColor),
+        ),
+        Expanded(child: Container()),
+      ],
     );
   }
 }
