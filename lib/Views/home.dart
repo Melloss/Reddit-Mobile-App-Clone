@@ -54,7 +54,7 @@ class _HomeState extends State<Home>
     return Scaffold(
       key: uiController.homeScaffoldKey,
       appBar: BuildAppBAr(title: tabTitles[selectedIndex]),
-      endDrawer: Drawer(),
+      endDrawer: const AccountDrawer(),
       body: TabBarView(
         controller: _tabController,
         children: _tabPages,
@@ -160,10 +160,10 @@ class _HomeState extends State<Home>
   static TextButton _buildTextButton(String s, IconData icon) {
     return TextButton(
       style: ButtonStyle(
-        backgroundColor: uiController.selectedListTile.value == s
-            ? const MaterialStatePropertyAll(Color(0xFFECECEC))
-            : null,
-      ),
+          backgroundColor: uiController.selectedListTile.value == s
+              ? const MaterialStatePropertyAll(Color(0xFFECECEC))
+              : null,
+          padding: const MaterialStatePropertyAll(EdgeInsets.all(3))),
       child: Builder(
         builder: (context) => Container(
           padding: const EdgeInsets.all(8),
@@ -182,7 +182,6 @@ class _HomeState extends State<Home>
         uiController.isHomePageArrowDown.value =
             uiController.isHomePageArrowDown.value ? false : true;
         uiController.selectedListTile.value = s;
-        print(uiController.isHomePageArrowDown.value);
       },
     );
   }
