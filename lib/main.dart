@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import './Views/home.dart';
 import './Helper/colorPallets.dart';
+import './Helper/init_controller.dart' as di;
+import 'package:get/get.dart';
 
 class App extends StatelessWidget with ColorPallets {
   const App({super.key});
@@ -26,4 +28,8 @@ class App extends StatelessWidget with ColorPallets {
   }
 }
 
-main() => runApp(App());
+main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await di.init();
+  runApp(const App());
+}

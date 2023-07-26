@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../Widgets/widgets.dart';
 import '../Helper/colorPallets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import '../Controllers/uiController.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -13,6 +15,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home>
     with SingleTickerProviderStateMixin, ColorPallets {
   late TabController _tabController;
+  static UIController uiController = Get.find();
 
   final _tabPages = <Widget>[
     _buildHomePageTab(),
@@ -22,6 +25,8 @@ class _HomeState extends State<Home>
     _buildInboxPageTab(),
   ];
 
+  static int selectedIndex = 0;
+  static List tabTitles = ["Home", "Community", "Create", "Chat", "Inbox"];
   static List<bool> isSelected = [true, false, false, false, false];
   static List<List<IconData>> icons = [
     [Icons.home_outlined, Icons.home_filled],
@@ -40,13 +45,16 @@ class _HomeState extends State<Home>
   @override
   void dispose() {
     _tabController.dispose();
+    uiController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildHomeAppBar(),
+      key: uiController.homeScaffoldKey,
+      appBar: BuildAppBAr(title: tabTitles[selectedIndex]),
+      endDrawer: Drawer(),
       body: TabBarView(
         controller: _tabController,
         children: _tabPages,
@@ -62,6 +70,7 @@ class _HomeState extends State<Home>
               });
               isSelected = [...temp];
               setState(() {
+                selectedIndex = index;
                 isSelected[index] = true;
               });
             },
@@ -80,14 +89,39 @@ class _HomeState extends State<Home>
     );
   }
 
-  static Widget _buildHomePageTab() {
-    return ListView(
-      children: const [
-        RedditPost(),
-        RedditPost(),
-        RedditPost(),
-      ],
-    );
+  static _buildHomePageTab() {
+    return Column(children: [
+      Obx(
+        () => uiController.isHomePageArrowDown.value
+            ? const SizedBox.shrink()
+            : Flexible(
+                flex: 3,
+                child: Container(
+                  width: double.infinity,
+                  color: Colors.white,
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _buildTextButton("Home", Icons.home),
+                        _buildTextButton(
+                            "Popular", Icons.arrow_circle_right_outlined),
+                        _buildTextButton("Watch", Icons.watch_later_outlined),
+                        _buildTextButton("Latest", Icons.new_releases),
+                      ]),
+                ),
+              ),
+      ),
+      Flexible(
+        flex: 7,
+        child: ListView(
+          children: const [
+            RedditPost(),
+            RedditPost(),
+            RedditPost(),
+          ],
+        ),
+      ),
+    ]);
   }
 
   static _buildCommunityPageTab() {
@@ -120,6 +154,36 @@ class _HomeState extends State<Home>
           fontSize: 11,
         ),
       ),
+    );
+  }
+
+  static TextButton _buildTextButton(String s, IconData icon) {
+    return TextButton(
+      style: ButtonStyle(
+        backgroundColor: uiController.selectedListTile.value == s
+            ? const MaterialStatePropertyAll(Color(0xFFECECEC))
+            : null,
+      ),
+      child: Builder(
+        builder: (context) => Container(
+          padding: const EdgeInsets.all(8),
+          width: MediaQuery.of(context).size.width * 0.85,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Icon(icon, color: ColorPallets.iconColor),
+              const SizedBox(width: 25),
+              Text(s, style: const TextStyle(color: ColorPallets.iconColor)),
+            ],
+          ),
+        ),
+      ),
+      onPressed: () {
+        uiController.isHomePageArrowDown.value =
+            uiController.isHomePageArrowDown.value ? false : true;
+        uiController.selectedListTile.value = s;
+        print(uiController.isHomePageArrowDown.value);
+      },
     );
   }
 }
