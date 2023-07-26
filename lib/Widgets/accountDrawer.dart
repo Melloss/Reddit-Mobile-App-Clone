@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../Helper/colorPallets.dart';
+import 'package:get/get.dart';
 
 class AccountDrawer extends StatefulWidget {
   const AccountDrawer({super.key});
@@ -39,6 +40,10 @@ class _AccountDrawerState extends State<AccountDrawer> with ColorPallets {
               _buildOnlineStatusButton(),
               const SizedBox(height: 15),
               _buildCreateAvatarButton(),
+              const SizedBox(height: 20),
+              _buildKarmaAndRedditAge(),
+              _buildOptionsMenu(),
+              _buildSettingOption(),
             ]),
           ),
         ],
@@ -135,5 +140,106 @@ class _AccountDrawerState extends State<AccountDrawer> with ColorPallets {
                 ],
               ),
             ));
+  }
+
+  _buildKarmaAndRedditAge() {
+    return Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+      Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const Icon(Icons.circle_notifications,
+                color: Colors.blue, size: 36),
+            const SizedBox(width: 5),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text(
+                  "1",
+                  style: TextStyle(
+                      color: ColorPallets.iconColor,
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 5),
+                Text(
+                  "Karma",
+                  style: TextStyle(
+                      fontSize: 12, color: ColorPallets.smallTextColor),
+                ),
+              ],
+            )
+          ],
+        ),
+        Container(
+          color: ColorPallets.iconColor.withOpacity(0.4),
+          width: 0.5,
+          height: 30,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const Icon(Icons.check_circle_sharp, color: Colors.blue, size: 30),
+            const SizedBox(width: 5),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text(
+                  "17d",
+                  style: TextStyle(
+                      color: ColorPallets.iconColor,
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 5),
+                Text(
+                  "Reddit age",
+                  style: TextStyle(
+                      fontSize: 12, color: ColorPallets.smallTextColor),
+                ),
+              ],
+            )
+          ],
+        ),
+      ]),
+      const SizedBox(height: 10),
+      Container(
+        color: ColorPallets.iconColor.withOpacity(0.4),
+        width: 270,
+        height: 0.5,
+      ),
+    ]);
+  }
+
+  Widget _buildOptionsMenu() {
+    return Expanded(
+      flex: 5,
+      child: ListView(
+        children: [
+          _buildOption(Icons.person_outline, "My profile"),
+          _buildOption(Icons.groups_outlined, "Create a community"),
+          _buildOption(Icons.lock_person_outlined, "Vault"),
+          _buildOption(Icons.copyright_outlined, "Reddit Coins"),
+          _buildOption(Icons.shield_outlined, "Reddit Premium"),
+          _buildOption(Icons.bookmarks_outlined, "Saved"),
+          _buildOption(Icons.access_time, "History")
+        ],
+      ),
+    );
+  }
+
+  _buildSettingOption() {
+    return Expanded(
+        flex: 1, child: _buildOption(Icons.settings_outlined, "Settings"));
+  }
+
+  _buildOption(IconData icon, String s) {
+    return TextButton(
+      style: const ButtonStyle(
+          padding: MaterialStatePropertyAll(
+              EdgeInsets.symmetric(vertical: 15, horizontal: 20))),
+      onPressed: () {},
+      child: Row(
+        children: [Icon(icon), const SizedBox(width: 15), Text(s)],
+      ),
+    );
   }
 }
