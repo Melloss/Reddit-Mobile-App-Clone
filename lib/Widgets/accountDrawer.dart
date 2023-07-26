@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../Helper/colorPallets.dart';
-import 'package:get/get.dart';
 
 class AccountDrawer extends StatefulWidget {
   const AccountDrawer({super.key});
