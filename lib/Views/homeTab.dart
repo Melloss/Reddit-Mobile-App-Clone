@@ -4,6 +4,7 @@ import '../Helper/colorPallets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import '../Controllers/uiController.dart';
+import './communityTab.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -51,41 +52,43 @@ class _HomeState extends State<Home>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: uiController.homeScaffoldKey,
-      appBar: BuildAppBAr(title: tabTitles[selectedIndex]),
-      endDrawer: const AccountDrawer(),
-      body: TabBarView(
-        controller: _tabController,
-        children: _tabPages,
-      ),
-      bottomNavigationBar: Material(
-        color: Colors.white,
-        child: SizedBox(
-          height: 55,
-          child: TabBar(
-            onTap: (index) {
-              final temp = isSelected.map((data) {
-                return false;
-              });
-              isSelected = [...temp];
-              setState(() {
-                selectedIndex = index;
-                isSelected[index] = true;
-              });
-            },
-            tabs: [
-              _buildTab("Home", 0),
-              _buildTab("Community", 1),
-              _buildTab("Create", 2),
-              _buildTab("Chat", 3),
-              _buildTab("Inbox", 4),
-            ],
-            controller: _tabController,
+    return SafeArea(
+      child: Scaffold(
+        key: uiController.homeScaffoldKey,
+        appBar: BuildAppBAr(title: tabTitles[selectedIndex]),
+        endDrawer: const AccountDrawer(),
+        body: TabBarView(
+          controller: _tabController,
+          children: _tabPages,
+        ),
+        bottomNavigationBar: Material(
+          color: Colors.white,
+          child: SizedBox(
+            height: 60,
+            child: TabBar(
+              onTap: (index) {
+                final temp = isSelected.map((data) {
+                  return false;
+                });
+                isSelected = [...temp];
+                setState(() {
+                  selectedIndex = index;
+                  isSelected[index] = true;
+                });
+              },
+              tabs: [
+                _buildTab("Home", 0),
+                _buildTab("Community", 1),
+                _buildTab("Create", 2),
+                _buildTab("Chat", 3),
+                _buildTab("Inbox", 4),
+              ],
+              controller: _tabController,
+            ),
           ),
         ),
+        drawer: const Drawer(),
       ),
-      drawer: const Drawer(),
     );
   }
 
@@ -125,7 +128,7 @@ class _HomeState extends State<Home>
   }
 
   static _buildCommunityPageTab() {
-    return Container();
+    return const CommunityTab();
   }
 
   static _buildCreatePageTab() {

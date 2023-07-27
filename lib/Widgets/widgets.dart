@@ -1,7 +1,8 @@
-export './HomeScreenWidgets/homeAppBar.dart';
-export './HomeScreenWidgets/redditPost.dart';
-export './HomeScreenWidgets/redditPostHeader.dart';
-export './HomeScreenWidgets/redditPostTitleAndContent.dart';
-export './HomeScreenWidgets/redditPostImageOrVideo.dart';
-export './HomeScreenWidgets/redditPostFooter.dart';
+export 'HomeTabWidgets/homeAppBar.dart';
+export 'HomeTabWidgets/redditPost.dart';
+export 'HomeTabWidgets/redditPostHeader.dart';
+export 'HomeTabWidgets/redditPostTitleAndContent.dart';
+export 'HomeTabWidgets/redditPostImageOrVideo.dart';
+export 'HomeTabWidgets/redditPostFooter.dart';
 export './accountDrawer.dart';
+export 'CommunityTabWidgets/circleTextButton.dart';
