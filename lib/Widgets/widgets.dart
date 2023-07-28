@@ -6,3 +6,5 @@ export 'HomeTabWidgets/redditPostImageOrVideo.dart';
 export 'HomeTabWidgets/redditPostFooter.dart';
 export './accountDrawer.dart';
 export 'CommunityTabWidgets/circleTextButton.dart';
+export 'CommunityTabWidgets/communityTextButton.dart';
+export 'CommunityTabWidgets/joinButton.dart';

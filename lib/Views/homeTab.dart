@@ -27,7 +27,7 @@ class _HomeState extends State<Home>
   ];
 
   static int selectedIndex = 0;
-  static List tabTitles = ["Home", "Community", "Create", "Chat", "Inbox"];
+  static List tabTitles = ["Home", "Communities", "Create", "Chat", "Inbox"];
   static List<bool> isSelected = [true, false, false, false, false];
   static List<List<IconData>> icons = [
     [Icons.home_outlined, Icons.home_filled],
@@ -55,13 +55,15 @@ class _HomeState extends State<Home>
     return SafeArea(
       child: Scaffold(
         key: uiController.homeScaffoldKey,
-        appBar: BuildAppBAr(title: tabTitles[selectedIndex]),
+        appBar: BuildAppBar(title: tabTitles[selectedIndex]),
         endDrawer: const AccountDrawer(),
         body: TabBarView(
+          physics: const NeverScrollableScrollPhysics(),
           controller: _tabController,
           children: _tabPages,
         ),
         bottomNavigationBar: Material(
+          elevation: 5,
           color: Colors.white,
           child: SizedBox(
             height: 60,
@@ -145,6 +147,7 @@ class _HomeState extends State<Home>
 
   static Widget _buildTab(String text, int index) {
     return Tab(
+      iconMargin: const EdgeInsets.symmetric(vertical: 3),
       icon: FaIcon(
         isSelected[index] ? icons[index][1] : icons[index][0],
         color: Colors.black.withOpacity(0.85),
@@ -154,7 +157,7 @@ class _HomeState extends State<Home>
         text,
         style: const TextStyle(
           color: ColorPallets.smallTextColor,
-          fontSize: 11,
+          fontSize: 10,
         ),
       ),
     );

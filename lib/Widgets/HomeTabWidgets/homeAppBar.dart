@@ -5,9 +5,9 @@ import 'package:reddit_mobile_app_clone/Helper/colorPallets.dart';
 import '../../Controllers/uiController.dart';
 import '../widgets.dart';
 
-class BuildAppBAr extends StatefulWidget implements PreferredSizeWidget {
+class BuildAppBar extends StatefulWidget implements PreferredSizeWidget {
   final String title;
-  const BuildAppBAr({
+  const BuildAppBar({
     super.key,
     required this.title,
   });
@@ -16,10 +16,10 @@ class BuildAppBAr extends StatefulWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size(300, 55);
 
   @override
-  State<BuildAppBAr> createState() => _BuildAppBArState();
+  State<BuildAppBar> createState() => _BuildAppBarState();
 }
 
-class _BuildAppBArState extends State<BuildAppBAr> with ColorPallets {
+class _BuildAppBarState extends State<BuildAppBar> with ColorPallets {
   UIController uiController = Get.find();
   _buildText(String text) {
     return Text(
@@ -37,6 +37,7 @@ class _BuildAppBArState extends State<BuildAppBAr> with ColorPallets {
       toolbarHeight: 200,
       leadingWidth: 25,
       title: buildTitle(widget.title),
+      elevation: widget.title == "Home" ? 2 : 0,
       actions: [
         _buildSearchButton(),
         _buildAccountButton(),
@@ -136,8 +137,8 @@ class _BuildAppBArState extends State<BuildAppBAr> with ColorPallets {
   Widget buildTitle(String title) {
     if (title == "Home") {
       return homeTabTitle();
-    } else if (title == "Community") {
-      return _buildText("Community");
+    } else if (title == "Communities") {
+      return _buildText("Communities");
     } else if (title == "Create") {
       return _buildText("Create");
     } else if (title == "Chat") {
@@ -146,49 +147,3 @@ class _BuildAppBArState extends State<BuildAppBAr> with ColorPallets {
     return _buildText("Inbox");
   }
 }
-
-
-// class ComboBoxMenu extends StatefulWidget {
-//   const ComboBoxMenu({super.key});
-//   @override
-//   State<ComboBoxMenu> createState() => _ComboBoxMenuState();
-// }
-
-// class _ComboBoxMenuState extends State<ComboBoxMenu> {
-//   String selectedItem = "Home";
-//   static final menuItems = ["Home", "Popular", "Watch", "Latest"];
-//   bool isArrowDown = true;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return DropdownButton<String>(
-//       underline: const SizedBox.shrink(),
-//       icon: isArrowDown
-//           ? const Icon(Icons.keyboard_arrow_down)
-//           : const Icon(Icons.keyboard_arrow_up),
-//       isExpanded: true,
-//       items: menuItems.map((String item) {
-//         return DropdownMenuItem<String>(
-//           value: item,
-//           child: Text(item),
-//         );
-//       }).toList(),
-//       value: selectedItem,
-//       style: const TextStyle(
-//         color: Colors.black,
-//         fontSize: 17,
-//       ),
-//       onTap: () {
-//         setState(() {
-//           isArrowDown = false;
-//         });
-//       },
-//       onChanged: ((newValue) {
-//         setState(() {
-//           isArrowDown = true;
-//           selectedItem = newValue.toString();
-//         });
-//       }),
-//     );
-//   }
-// }

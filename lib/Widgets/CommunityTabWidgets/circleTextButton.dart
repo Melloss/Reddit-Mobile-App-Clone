@@ -8,25 +8,30 @@ class CircleTextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      clipBehavior: Clip.hardEdge,
+      margin: const EdgeInsets.symmetric(horizontal: 3),
       padding: const EdgeInsets.all(1),
       decoration: BoxDecoration(
         color: ColorPallets.iconColor,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 8),
         decoration: BoxDecoration(
-          color: Theme.of(context).scaffoldBackgroundColor,
+          color: Colors.white,
           borderRadius: BorderRadius.circular(20),
         ),
         child: TextButton(
-          child: Text(
-            text,
-            style: const TextStyle(
-              fontSize: 13,
+          clipBehavior: Clip.none,
+          onPressed: () {},
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 10),
+            child: Text(
+              text,
+              style: const TextStyle(
+                fontSize: 13,
+              ),
             ),
           ),
-          onPressed: () {},
         ),
       ),
     );
