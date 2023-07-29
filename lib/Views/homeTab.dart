@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import '../Controllers/uiController.dart';
 import './communityTab.dart';
+import './createTab.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -36,6 +37,7 @@ class _HomeState extends State<Home>
     [Icons.message_outlined, Icons.message_rounded],
     [FontAwesomeIcons.bell, FontAwesomeIcons.solidBell]
   ];
+  late int prevIndex;
 
   @override
   void initState() {
@@ -69,14 +71,32 @@ class _HomeState extends State<Home>
             height: 60,
             child: TabBar(
               onTap: (index) {
-                final temp = isSelected.map((data) {
-                  return false;
-                });
-                isSelected = [...temp];
-                setState(() {
-                  selectedIndex = index;
-                  isSelected[index] = true;
-                });
+                if (index == 2) {
+                  prevIndex = _tabController.previousIndex;
+                  _tabController.animateTo(_tabController.previousIndex);
+                  final temp = isSelected.map((data) {
+                    return false;
+                  });
+
+                  isSelected = [...temp];
+                  isSelected[prevIndex] = true;
+
+                  setState(() {
+                    selectedIndex = prevIndex;
+                    isSelected = isSelected;
+                  });
+
+                  Get.to(() => const CreateTab());
+                } else {
+                  final temp = isSelected.map((data) {
+                    return false;
+                  });
+                  isSelected = [...temp];
+                  setState(() {
+                    selectedIndex = index;
+                    isSelected[index] = true;
+                  });
+                }
               },
               tabs: [
                 _buildTab("Home", 0),

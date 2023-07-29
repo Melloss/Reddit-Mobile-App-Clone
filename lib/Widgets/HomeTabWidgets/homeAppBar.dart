@@ -50,9 +50,8 @@ class _BuildAppBarState extends State<BuildAppBar> with ColorPallets {
       width: 100,
       height: 35,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: const Color(0xFFECECEC),
-      ),
+          borderRadius: BorderRadius.circular(10),
+          color: ColorPallets.rareButtonColor),
       child: TextButton(
         onPressed: () {
           uiController.isHomePageArrowDown.value =
@@ -139,8 +138,7 @@ class _BuildAppBarState extends State<BuildAppBar> with ColorPallets {
       return homeTabTitle();
     } else if (title == "Communities") {
       return _buildText("Communities");
-    } else if (title == "Create") {
-      return _buildText("Create");
+
     } else if (title == "Chat") {
       return _buildText("Chat");
     }

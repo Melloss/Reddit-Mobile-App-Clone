@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'Views/homeTab.dart';
 import './Helper/colorPallets.dart';
 import './Helper/init_controller.dart' as di;
+import 'package:get/get.dart';
 
 class App extends StatelessWidget with ColorPallets {
   const App({super.key});
 
   @override
   Widget build(context) {
-    return MaterialApp(
+    return GetMaterialApp(
       home: const Home(),
       theme: ThemeData.light().copyWith(
           scaffoldBackgroundColor: const Color(0xFFF2F3F5),
@@ -22,6 +23,7 @@ class App extends StatelessWidget with ColorPallets {
             color: Colors.black,
             fontSize: 15,
           )),
+          disabledColor: ColorPallets.rareButtonColor,
           textButtonTheme: const TextButtonThemeData(
             style: ButtonStyle(
               padding: MaterialStatePropertyAll(EdgeInsets.all(10)),

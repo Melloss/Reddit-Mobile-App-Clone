@@ -3,6 +3,7 @@ import '../Helper/colorPallets.dart';
 import '../Widgets/widgets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'dart:async';
+import '../Models/models.dart';
 
 class CommunityTab extends StatefulWidget {
   const CommunityTab({super.key});
@@ -95,38 +96,6 @@ class _CommunityTabState extends State<CommunityTab> with ColorPallets {
       "members": "6.1m",
       "description": "Find comfort in knowing you're not alone in life's minor",
     },
-  ];
-  final communityCatagories = [
-    "Q&As",
-    "Funny",
-    "Cringe & Facepalm",
-    "Reddit Meta",
-    "Memes",
-    "Interesting",
-    "Ethics & Philosophy",
-    "Career",
-    "Role-Playing Games",
-    "Stories & Confessions",
-    "News",
-    "Action Games",
-    "Anime & Manga",
-    "Places in Europe",
-    "Animals & Pets",
-    "Places in North America",
-    "Podcasts",
-    "Cars & Trucks",
-    "Tabletop Games",
-    "Gaming News & Discussion",
-    "Law",
-    "Food industry & Restaurants",
-    "Movie News & Discussion",
-    "Personal Finance",
-    "Adventure Games",
-    "Computers & Hardware",
-    "Celebrities",
-    "Paranormal & Unexplained",
-    "Beauty & Grooming",
-    "Amazing"
   ];
 
   int currentSlide = 0;
@@ -239,7 +208,7 @@ class _CommunityTabState extends State<CommunityTab> with ColorPallets {
           autoPlayInterval: const Duration(seconds: 10),
           disableCenter: true,
           enlargeCenterPage: true,
-          height: 260,
+          height: 280,
           autoPlay: true,
           aspectRatio: 16 / 9,
           autoPlayCurve: Curves.fastLinearToSlowEaseIn,
@@ -287,7 +256,6 @@ class _CommunityTabState extends State<CommunityTab> with ColorPallets {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: CircleAvatar(
-                    backgroundColor: Colors.blue,
                     radius: 18,
                     foregroundImage: AssetImage(data['communityImage'] ?? ""),
                   ),
