@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import '../Controllers/uiController.dart';
 import './communityTab.dart';
 import './createTab.dart';
+import './chatTab.dart';
+import './inboxTab.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -56,6 +58,7 @@ class _HomeState extends State<Home>
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        extendBody: true,
         key: uiController.homeScaffoldKey,
         appBar: BuildAppBar(title: tabTitles[selectedIndex]),
         endDrawer: const AccountDrawer(),
@@ -68,8 +71,16 @@ class _HomeState extends State<Home>
           elevation: 5,
           color: Colors.white,
           child: SizedBox(
-            height: 60,
+            height: 55,
             child: TabBar(
+              labelPadding: EdgeInsets.zero,
+              labelColor: Colors.black,
+              labelStyle: const TextStyle(
+                fontSize: 10.0,
+              ),
+              indicator: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
+              ),
               onTap: (index) {
                 if (index == 2) {
                   prevIndex = _tabController.previousIndex;
@@ -158,11 +169,11 @@ class _HomeState extends State<Home>
   }
 
   static _buildChatPageTab() {
-    return Container();
+    return const ChatTab();
   }
 
   static _buildInboxPageTab() {
-    return Container();
+    return const InboxTab();
   }
 
   static Widget _buildTab(String text, int index) {
@@ -173,13 +184,7 @@ class _HomeState extends State<Home>
         color: Colors.black.withOpacity(0.85),
         size: 25,
       ),
-      child: Text(
-        text,
-        style: const TextStyle(
-          color: ColorPallets.smallTextColor,
-          fontSize: 10,
-        ),
-      ),
+      text: text,
     );
   }
 

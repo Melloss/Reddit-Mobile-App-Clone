@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reddit_mobile_app_clone/Helper/colorPallets.dart';
-import '../../Controllers/uiController.dart';
-import '../widgets.dart';
+import '../../Controllers/controllers.dart';
+import '../../Views/newChat.dart';
 
 class BuildAppBar extends StatefulWidget implements PreferredSizeWidget {
   final String title;
@@ -13,7 +13,7 @@ class BuildAppBar extends StatefulWidget implements PreferredSizeWidget {
   });
 
   @override
-  Size get preferredSize => const Size(300, 55);
+  Size get preferredSize => const Size(300, 57);
 
   @override
   State<BuildAppBar> createState() => _BuildAppBarState();
@@ -21,6 +21,8 @@ class BuildAppBar extends StatefulWidget implements PreferredSizeWidget {
 
 class _BuildAppBarState extends State<BuildAppBar> with ColorPallets {
   UIController uiController = Get.find();
+  ConnectionController connectionController = Get.find();
+
   _buildText(String text) {
     return Text(
       text,
@@ -34,12 +36,16 @@ class _BuildAppBarState extends State<BuildAppBar> with ColorPallets {
   @override
   build(BuildContext context) {
     return AppBar(
-      toolbarHeight: 200,
       leadingWidth: 25,
       title: buildTitle(widget.title),
       elevation: widget.title == "Home" ? 2 : 0,
       actions: [
-        _buildSearchButton(),
+        if (widget.title == "Chat")
+          _buildChatIconButton()
+        else if (widget.title == "Inbox")
+          _buildInboxButton()
+        else
+          _buildSearchButton(),
         _buildAccountButton(),
       ],
     );
@@ -47,10 +53,10 @@ class _BuildAppBarState extends State<BuildAppBar> with ColorPallets {
 
   Widget homeTabTitle() {
     return Container(
-      width: 100,
-      height: 35,
+      width: MediaQuery.of(context).size.width * 0.28,
+      height: 40,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(5),
           color: ColorPallets.rareButtonColor),
       child: TextButton(
         onPressed: () {
@@ -62,25 +68,22 @@ class _BuildAppBarState extends State<BuildAppBar> with ColorPallets {
           });
         },
         child: Obx(
-          () => Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(uiController.selectedListTile.value,
-                    style: const TextStyle(
-                      color: ColorPallets.iconColor,
-                    )),
-                const SizedBox(width: 5),
-                uiController.isHomePageArrowDown.value
-                    ? const Icon(
-                        Icons.keyboard_arrow_down,
-                        color: ColorPallets.iconColor,
-                      )
-                    : const Icon(
-                        Icons.keyboard_arrow_up,
-                        color: ColorPallets.iconColor,
-                      ),
-              ]),
+          () => Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Text(uiController.selectedListTile.value,
+                style: const TextStyle(
+                  color: ColorPallets.iconColor,
+                )),
+            const SizedBox(width: 5),
+            uiController.isHomePageArrowDown.value
+                ? const Icon(
+                    Icons.keyboard_arrow_down,
+                    color: ColorPallets.iconColor,
+                  )
+                : const Icon(
+                    Icons.keyboard_arrow_up,
+                    color: ColorPallets.iconColor,
+                  ),
+          ]),
         ),
       ),
     );
@@ -88,33 +91,37 @@ class _BuildAppBarState extends State<BuildAppBar> with ColorPallets {
 
   _buildAccountButton() {
     return Container(
-      width: 45,
-      height: 45,
+      width: 50,
+      height: 50,
       margin: const EdgeInsets.only(right: 10),
       child: TextButton(
         child: CircleAvatar(
           maxRadius: 15,
-          child: Stack(children: [
-            Image.asset('assets/reddit.png'),
-            Positioned(
-              bottom: 0,
-              right: 0,
-              child: Container(
-                padding: const EdgeInsets.all(2),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: Container(
-                  width: 5,
-                  height: 5,
-                  decoration: BoxDecoration(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(30)),
-                ),
-              ),
-            ),
-          ]),
+          child: Obx(
+            () => Stack(children: [
+              Image.asset('assets/reddit.png'),
+              connectionController.connectedToInternet.value
+                  ? Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: Container(
+                        padding: const EdgeInsets.all(2),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: Container(
+                          width: 5,
+                          height: 5,
+                          decoration: BoxDecoration(
+                              color: Colors.green,
+                              borderRadius: BorderRadius.circular(30)),
+                        ),
+                      ),
+                    )
+                  : const SizedBox.shrink(),
+            ]),
+          ),
         ),
         onPressed: () {
           uiController.homeScaffoldKey.currentState?.openEndDrawer();
@@ -138,10 +145,81 @@ class _BuildAppBarState extends State<BuildAppBar> with ColorPallets {
       return homeTabTitle();
     } else if (title == "Communities") {
       return _buildText("Communities");
-
     } else if (title == "Chat") {
       return _buildText("Chat");
     }
     return _buildText("Inbox");
+  }
+
+  _buildChatIconButton() {
+    return Padding(
+      padding: const EdgeInsets.all(5),
+      child: IconButton(
+        onPressed: () {
+          Get.to(() => const NewChat());
+        },
+        icon: Stack(children: const [
+          Icon(
+            fill: 1,
+            Icons.chat_bubble_outline_outlined,
+            color: ColorPallets.iconColor,
+            size: 28,
+          ),
+          Positioned(
+            top: 4,
+            left: 7,
+            child: Icon(
+              Icons.add,
+              size: 15,
+              color: ColorPallets.iconColor,
+            ),
+          )
+        ]),
+      ),
+    );
+  }
+
+  _buildInboxButton() {
+    return IconButton(
+      onPressed: () {
+        showBottomSheet(
+            clipBehavior: Clip.antiAlias,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            context: context,
+            builder: (context) {
+              return Container(
+                clipBehavior: Clip.antiAlias,
+                height: 150,
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                margin: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: Colors.white,
+                ),
+                child: Column(children: [
+                  _buildTextButton(Icons.edit_outlined, "New Message"),
+                  _buildTextButton(Icons.mark_as_unread_outlined,
+                      "Mark all inbox tabs as read"),
+                  _buildTextButton(
+                      Icons.settings_outlined, "Edit notification settings"),
+                ]),
+              );
+            });
+      },
+      icon: const Icon(Icons.more_vert_outlined, color: ColorPallets.iconColor),
+    );
+  }
+
+  _buildTextButton(IconData icon, String text) {
+    return Expanded(
+      child: TextButton(
+        onPressed: () {},
+        child: Row(children: [
+          Icon(icon),
+          const SizedBox(width: 10),
+          Text(text),
+        ]),
+      ),
+    );
   }
 }

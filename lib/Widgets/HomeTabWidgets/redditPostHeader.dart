@@ -99,8 +99,8 @@ class _RedditPostHeaderState extends State<RedditPostHeader> {
         isJoinClicked
             ? _buildCheckedLogo()
             : Container(
-                width: 45,
-                height: 25,
+                width: 50,
+                height: 30,
                 decoration: BoxDecoration(
                   color: ColorPallets.buttonBackgroundColor,
                   borderRadius: BorderRadius.circular(30),
@@ -119,8 +119,8 @@ class _RedditPostHeaderState extends State<RedditPostHeader> {
 
   _buildCheckedLogo() {
     return Container(
-        width: 33,
-        margin: const EdgeInsets.only(right: 5),
+        width: 50,
+        height: 30,
         padding: const EdgeInsets.all(1.5),
         decoration: BoxDecoration(
             color: ColorPallets.buttonBackgroundColor,

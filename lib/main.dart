@@ -3,6 +3,7 @@ import 'Views/homeTab.dart';
 import './Helper/colorPallets.dart';
 import './Helper/init_controller.dart' as di;
 import 'package:get/get.dart';
+import './Controllers/connectionController.dart';
 
 class App extends StatelessWidget with ColorPallets {
   const App({super.key});
@@ -17,6 +18,7 @@ class App extends StatelessWidget with ColorPallets {
             backgroundColor: Color(0xFFFFFFFF),
             iconTheme: IconThemeData(color: ColorPallets.iconColor),
             elevation: 2,
+            foregroundColor: ColorPallets.normalTextColor,
           ),
           textTheme: const TextTheme(
               bodyMedium: TextStyle(
@@ -24,6 +26,9 @@ class App extends StatelessWidget with ColorPallets {
             fontSize: 15,
           )),
           disabledColor: ColorPallets.rareButtonColor,
+          tabBarTheme: const TabBarTheme(
+            labelColor: ColorPallets.normalTextColor,
+          ),
           textButtonTheme: const TextButtonThemeData(
             style: ButtonStyle(
               padding: MaterialStatePropertyAll(EdgeInsets.all(10)),
@@ -36,6 +41,11 @@ class App extends StatelessWidget with ColorPallets {
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  //initialize all controllers
   await di.init();
+
+  //connection listner initialized
+  ConnectionController connectionController = Get.find();
+  connectionController.addconnectionListener();
   runApp(const App());
 }

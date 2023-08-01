@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../Helper/colorPallets.dart';
+import '../../Controllers/controllers.dart';
+import 'package:get/get.dart';
 
 class AccountDrawer extends StatefulWidget {
   const AccountDrawer({super.key});
@@ -9,7 +11,8 @@ class AccountDrawer extends StatefulWidget {
 }
 
 class _AccountDrawerState extends State<AccountDrawer> with ColorPallets {
-  bool isOnline = true;
+  late bool showMeOnline;
+  ConnectionController connectionController = Get.find();
 
   Text status(bool online) {
     if (online == true) {
@@ -18,6 +21,13 @@ class _AccountDrawerState extends State<AccountDrawer> with ColorPallets {
     }
     return const Text("Online Status: Off",
         style: TextStyle(color: ColorPallets.iconColor));
+  }
+
+  @override
+  void initState() {
+    showMeOnline = connectionController.connectedToInternet.value;
+
+    super.initState();
   }
 
   @override
@@ -68,7 +78,7 @@ class _AccountDrawerState extends State<AccountDrawer> with ColorPallets {
       height: 30,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: isOnline ? Colors.green : ColorPallets.iconColor,
+        color: showMeOnline ? Colors.green : ColorPallets.iconColor,
       ),
       child: Container(
         decoration: BoxDecoration(
@@ -79,7 +89,7 @@ class _AccountDrawerState extends State<AccountDrawer> with ColorPallets {
           style: const ButtonStyle(
               padding: MaterialStatePropertyAll(EdgeInsets.zero)),
           child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            isOnline
+            showMeOnline
                 ? Container(
                     width: 10,
                     height: 10,
@@ -88,12 +98,12 @@ class _AccountDrawerState extends State<AccountDrawer> with ColorPallets {
                         borderRadius: BorderRadius.circular(30)),
                   )
                 : const SizedBox.shrink(),
-            isOnline ? const SizedBox(width: 10) : const SizedBox.shrink(),
-            status(isOnline),
+            showMeOnline ? const SizedBox(width: 10) : const SizedBox.shrink(),
+            status(showMeOnline),
           ]),
           onPressed: () {
             setState(() {
-              isOnline = !isOnline;
+              showMeOnline = !showMeOnline;
             });
           },
         ),

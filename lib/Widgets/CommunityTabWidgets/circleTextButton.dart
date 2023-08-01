@@ -24,7 +24,7 @@ class CircleTextButton extends StatelessWidget {
           clipBehavior: Clip.none,
           onPressed: () {},
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 10),
+            padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 10),
             child: Text(
               text,
               style: const TextStyle(

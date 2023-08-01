@@ -6,4 +6,5 @@ mixin ColorPallets {
   static const buttonBackgroundColor = Color(0xFF0045AC);
   static const normalTextColor = Color(0XFF313131);
   static const rareButtonColor = Color(0xFFECECEC);
+  static const messageBackground = Color(0xFF181818);
 }

@@ -29,6 +29,7 @@ class _CreateTabState extends State<CreateTab> with ColorPallets {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        extendBody: true,
         backgroundColor: Colors.white,
         body: Container(
           padding: const EdgeInsets.all(5),
@@ -248,8 +249,9 @@ class _CreateTabState extends State<CreateTab> with ColorPallets {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return Dialog(
-                      child: Container(
+                    return AlertDialog(
+                      contentPadding: EdgeInsets.zero,
+                      content: Container(
                         padding: const EdgeInsets.all(15),
                         width: double.infinity,
                         height: 100,
@@ -260,7 +262,7 @@ class _CreateTabState extends State<CreateTab> with ColorPallets {
                                 "Discard post submission?",
                                 style: TextStyle(
                                   color: ColorPallets.normalTextColor,
-                                  fontSize: 13,
+                                  fontSize: 15,
                                 ),
                               ),
                               const SizedBox(height: 15),
@@ -310,7 +312,8 @@ class _CreateTabState extends State<CreateTab> with ColorPallets {
                                     ),
                                   )
                                 ],
-                              )
+                              ),
+                              Expanded(child: Container()),
                             ]),
                       ),
                     );
@@ -322,10 +325,10 @@ class _CreateTabState extends State<CreateTab> with ColorPallets {
         ),
         Expanded(child: Container()),
         Container(
-          width: 63,
-          height: 35,
+          width: 70,
+          height: 38,
           margin: const EdgeInsets.only(right: 10, top: 5),
-          clipBehavior: Clip.antiAliasWithSaveLayer,
+          clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
             color: isEmpty
                 ? ColorPallets.rareButtonColor
@@ -334,18 +337,15 @@ class _CreateTabState extends State<CreateTab> with ColorPallets {
           ),
           child: TextButton(
             onPressed: isEmpty == true ? null : () {},
-            child: Padding(
-              padding: const EdgeInsets.all(8),
-              child: Center(
-                  child: Text(
-                'Next',
-                style: TextStyle(
-                    color: isEmpty
-                        ? ColorPallets.smallTextColor.withOpacity(0.3)
-                        : Colors.white,
-                    fontSize: 11),
-              )),
-            ),
+            child: Center(
+                child: Text(
+              'Next',
+              style: TextStyle(
+                  color: isEmpty
+                      ? ColorPallets.smallTextColor.withOpacity(0.5)
+                      : Colors.white,
+                  fontSize: 11),
+            )),
           ),
         )
       ],
