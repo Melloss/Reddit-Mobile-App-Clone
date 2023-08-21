@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../Helper/colorPallets.dart';
 
@@ -27,21 +28,24 @@ class _CreateTabState extends State<CreateTab> with ColorPallets {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        extendBody: true,
-        backgroundColor: Colors.white,
-        body: Container(
-          padding: const EdgeInsets.all(5),
-          child: Column(
-            children: [
-              _buildTopButtons(),
-              _buildTitleInput(),
-              _buildLinkInput(),
-              _buildTextOptional(),
-              _buildBottomButtons(),
-            ],
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 0,
+        leading: const SizedBox.shrink(),
+        elevation: 0,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
+      ),
+      backgroundColor: Colors.white,
+      body: Container(
+        padding: const EdgeInsets.all(5),
+        child: Column(
+          children: [
+            _buildTopButtons(),
+            _buildTitleInput(),
+            _buildLinkInput(),
+            _buildTextOptional(),
+            _buildBottomButtons(),
+          ],
         ),
       ),
     );
@@ -254,8 +258,10 @@ class _CreateTabState extends State<CreateTab> with ColorPallets {
                       content: Container(
                         padding: const EdgeInsets.all(15),
                         width: double.infinity,
-                        height: 100,
+                        height: MediaQuery.of(context).size.height * 0.13,
                         child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Text(
@@ -270,7 +276,9 @@ class _CreateTabState extends State<CreateTab> with ColorPallets {
                                 children: [
                                   Expanded(
                                     child: Container(
-                                      padding: const EdgeInsets.all(5),
+                                      clipBehavior: Clip.antiAlias,
+                                      height: 40,
+                                      padding: const EdgeInsets.all(2),
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(20),
                                         color: ColorPallets.rareButtonColor,
@@ -291,7 +299,9 @@ class _CreateTabState extends State<CreateTab> with ColorPallets {
                                   const SizedBox(width: 10),
                                   Expanded(
                                     child: Container(
-                                      padding: const EdgeInsets.all(5),
+                                      clipBehavior: Clip.antiAlias,
+                                      height: 40,
+                                      padding: const EdgeInsets.all(2),
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(20),
                                         color: Colors.red,

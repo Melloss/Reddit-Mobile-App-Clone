@@ -58,7 +58,7 @@ class InboxNotification extends StatelessWidget with ColorPallets {
                     ]),
                   ),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.73,
+                    width: MediaQuery.of(context).size.width * 0.72,
                     child: Text(
                       content,
                       style: const TextStyle(
@@ -92,7 +92,7 @@ class InboxNotification extends StatelessWidget with ColorPallets {
   Widget _buildBottomSheet() {
     return Container(
       width: double.infinity,
-      height: 280,
+      height: 300,
       clipBehavior: Clip.antiAlias,
       decoration: const BoxDecoration(
         color: Colors.white,
@@ -113,6 +113,7 @@ class InboxNotification extends StatelessWidget with ColorPallets {
               ),
             ),
           ),
+          const SizedBox(height: 3),
           const Center(
             child: Text("Manage Notification",
                 style: TextStyle(
@@ -139,18 +140,21 @@ class InboxNotification extends StatelessWidget with ColorPallets {
             task: () {},
           ),
           Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(5),
-              margin: const EdgeInsets.symmetric(horizontal: 10),
-              decoration: BoxDecoration(
-                color: ColorPallets.rareButtonColor,
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: TextButton(
-                  onPressed: () {
-                    Get.back();
-                  },
-                  child: const Text("Close")))
+            clipBehavior: Clip.antiAlias,
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            decoration: BoxDecoration(
+              color: ColorPallets.rareButtonColor,
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: MaterialButton(
+              clipBehavior: Clip.antiAlias,
+              onPressed: () {
+                Get.back();
+              },
+              child: const Text("Close"),
+            ),
+          )
         ],
       ),
     );

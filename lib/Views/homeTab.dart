@@ -34,7 +34,7 @@ class _HomeState extends State<Home>
   static List<bool> isSelected = [true, false, false, false, false];
   static List<List<IconData>> icons = [
     [Icons.home_outlined, Icons.home_filled],
-    [Icons.group_outlined, Icons.group],
+    [FontAwesomeIcons.compass, FontAwesomeIcons.solidCompass],
     [Icons.add_outlined, Icons.add_rounded],
     [Icons.message_outlined, Icons.message_rounded],
     [FontAwesomeIcons.bell, FontAwesomeIcons.solidBell]
@@ -56,72 +56,69 @@ class _HomeState extends State<Home>
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        extendBody: true,
-        key: uiController.homeScaffoldKey,
-        appBar: BuildAppBar(title: tabTitles[selectedIndex]),
-        endDrawer: const AccountDrawer(),
-        body: TabBarView(
-          physics: const NeverScrollableScrollPhysics(),
-          controller: _tabController,
-          children: _tabPages,
-        ),
-        bottomNavigationBar: Material(
-          elevation: 5,
-          color: Colors.white,
-          child: SizedBox(
-            height: 55,
-            child: TabBar(
-              labelPadding: EdgeInsets.zero,
-              labelColor: Colors.black,
-              labelStyle: const TextStyle(
-                fontSize: 10.0,
-              ),
-              indicator: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-              ),
-              onTap: (index) {
-                if (index == 2) {
-                  prevIndex = _tabController.previousIndex;
-                  _tabController.animateTo(_tabController.previousIndex);
-                  final temp = isSelected.map((data) {
-                    return false;
-                  });
-
-                  isSelected = [...temp];
-                  isSelected[prevIndex] = true;
-
-                  setState(() {
-                    selectedIndex = prevIndex;
-                    isSelected = isSelected;
-                  });
-
-                  Get.to(() => const CreateTab());
-                } else {
-                  final temp = isSelected.map((data) {
-                    return false;
-                  });
-                  isSelected = [...temp];
-                  setState(() {
-                    selectedIndex = index;
-                    isSelected[index] = true;
-                  });
-                }
-              },
-              tabs: [
-                _buildTab("Home", 0),
-                _buildTab("Community", 1),
-                _buildTab("Create", 2),
-                _buildTab("Chat", 3),
-                _buildTab("Inbox", 4),
-              ],
-              controller: _tabController,
+    return Scaffold(
+      key: uiController.homeScaffoldKey,
+      appBar: BuildAppBar(title: tabTitles[selectedIndex]),
+      endDrawer: const AccountDrawer(),
+      body: TabBarView(
+        physics: const NeverScrollableScrollPhysics(),
+        controller: _tabController,
+        children: _tabPages,
+      ),
+      bottomNavigationBar: Material(
+        elevation: 5,
+        color: Colors.white,
+        child: SizedBox(
+          height: 55,
+          child: TabBar(
+            labelPadding: EdgeInsets.zero,
+            labelColor: Colors.black,
+            labelStyle: const TextStyle(
+              fontSize: 10.0,
             ),
+            indicator: BoxDecoration(
+              borderRadius: BorderRadius.circular(50),
+            ),
+            onTap: (index) {
+              if (index == 2) {
+                prevIndex = _tabController.previousIndex;
+                _tabController.animateTo(_tabController.previousIndex);
+                final temp = isSelected.map((data) {
+                  return false;
+                });
+
+                isSelected = [...temp];
+                isSelected[prevIndex] = true;
+
+                setState(() {
+                  selectedIndex = prevIndex;
+                  isSelected = isSelected;
+                });
+
+                Get.to(() => const CreateTab());
+              } else {
+                final temp = isSelected.map((data) {
+                  return false;
+                });
+                isSelected = [...temp];
+                setState(() {
+                  selectedIndex = index;
+                  isSelected[index] = true;
+                });
+              }
+            },
+            tabs: [
+              _buildTab("Home", 0),
+              _buildTab("Community", 1),
+              _buildTab("Create", 2),
+              _buildTab("Chat", 3),
+              _buildTab("Inbox", 4),
+            ],
+            controller: _tabController,
           ),
         ),
-        drawer: const Drawer(),
       ),
+      drawer: const Drawer(),
     );
   }
 
@@ -148,7 +145,7 @@ class _HomeState extends State<Home>
               ),
       ),
       Flexible(
-        flex: 7,
+        flex: 6,
         child: ListView(
           children: const [
             RedditPost(),
@@ -181,8 +178,8 @@ class _HomeState extends State<Home>
       iconMargin: const EdgeInsets.symmetric(vertical: 3),
       icon: FaIcon(
         isSelected[index] ? icons[index][1] : icons[index][0],
-        color: Colors.black.withOpacity(0.85),
-        size: 25,
+        color: Colors.black.withOpacity(0.75),
+        size: text == 'Community' || text == "Inbox" ? 23 : 25,
       ),
       text: text,
     );

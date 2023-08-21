@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:reddit_mobile_app_clone/Helper/colorPallets.dart';
 import '../../Controllers/controllers.dart';
@@ -36,9 +37,12 @@ class _BuildAppBarState extends State<BuildAppBar> with ColorPallets {
   @override
   build(BuildContext context) {
     return AppBar(
+      systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.dark),
       leadingWidth: 25,
       title: buildTitle(widget.title),
-      elevation: widget.title == "Home" ? 2 : 0,
+      elevation: widget.title == "Home" ? 1 : 0,
       actions: [
         if (widget.title == "Chat")
           _buildChatIconButton()
@@ -53,8 +57,8 @@ class _BuildAppBarState extends State<BuildAppBar> with ColorPallets {
 
   Widget homeTabTitle() {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.28,
       height: 40,
+      width: MediaQuery.of(context).size.width * 0.27,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
           color: ColorPallets.rareButtonColor),
@@ -68,22 +72,27 @@ class _BuildAppBarState extends State<BuildAppBar> with ColorPallets {
           });
         },
         child: Obx(
-          () => Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Text(uiController.selectedListTile.value,
-                style: const TextStyle(
-                  color: ColorPallets.iconColor,
-                )),
-            const SizedBox(width: 5),
-            uiController.isHomePageArrowDown.value
-                ? const Icon(
-                    Icons.keyboard_arrow_down,
-                    color: ColorPallets.iconColor,
-                  )
-                : const Icon(
-                    Icons.keyboard_arrow_up,
-                    color: ColorPallets.iconColor,
-                  ),
-          ]),
+          () => Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(uiController.selectedListTile.value,
+                    style: const TextStyle(
+                      color: ColorPallets.iconColor,
+                    )),
+                const SizedBox(width: 5),
+                uiController.isHomePageArrowDown.value
+                    ? const Icon(
+                        Icons.keyboard_arrow_down,
+                        color: ColorPallets.iconColor,
+                        size: 18,
+                      )
+                    : const Icon(
+                        Icons.keyboard_arrow_up,
+                        color: ColorPallets.iconColor,
+                        size: 18,
+                      ),
+              ]),
         ),
       ),
     );

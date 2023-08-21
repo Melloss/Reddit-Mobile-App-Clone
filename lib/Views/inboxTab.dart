@@ -61,7 +61,7 @@ class _InboxTabState extends State<InboxTab> {
             ],
           )
         : const Center(
-            child: CircularProgressIndicator(),
+            child: LoadingAnimation(),
           ));
   }
 
@@ -79,7 +79,7 @@ class _InboxTabState extends State<InboxTab> {
                     task: () {})
               ],
             )
-          : const Center(child: CircularProgressIndicator()),
+          : const Center(child: LoadingAnimation()),
     );
   }
 

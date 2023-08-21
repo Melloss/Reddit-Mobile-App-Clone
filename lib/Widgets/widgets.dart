@@ -10,3 +10,4 @@ export 'CommunityTabWidgets/communityTextButton.dart';
 export 'CommunityTabWidgets/joinButton.dart';
 export './InboxTabWidgets/inboxNotification.dart';
 export './InboxTabWidgets/inboxMessage.dart';
+export './loading_animation.dart';

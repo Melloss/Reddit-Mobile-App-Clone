@@ -157,8 +157,13 @@ class _AccountDrawerState extends State<AccountDrawer> with ColorPallets {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const Icon(Icons.circle_notifications,
-                color: Colors.blue, size: 36),
+            Container(
+              width: 30,
+              height: 30,
+              decoration: const BoxDecoration(
+                image: DecorationImage(image: AssetImage('assets/karma.png')),
+              ),
+            ),
             const SizedBox(width: 5),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
