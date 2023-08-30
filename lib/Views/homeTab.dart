@@ -60,6 +60,7 @@ class _HomeState extends State<Home>
       key: uiController.homeScaffoldKey,
       appBar: BuildAppBar(title: tabTitles[selectedIndex]),
       endDrawer: const AccountDrawer(),
+      drawer: const MainDrawer(),
       body: TabBarView(
         physics: const NeverScrollableScrollPhysics(),
         controller: _tabController,
@@ -118,7 +119,6 @@ class _HomeState extends State<Home>
           ),
         ),
       ),
-      drawer: const Drawer(),
     );
   }
 
