@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../Helper/colorPallets.dart';
+import '../Helper/color_pallet.dart';
 import '../../Controllers/controllers.dart';
 import 'package:get/get.dart';
 

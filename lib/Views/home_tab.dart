@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import '../Widgets/widgets.dart';
-import '../Helper/colorPallets.dart';
+import '../Helper/color_pallet.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import '../Controllers/uiController.dart';
-import './communityTab.dart';
-import './createTab.dart';
-import './chatTab.dart';
-import './inboxTab.dart';
+import '../Controllers/ui_controller.dart';
+import 'community_tab.dart';
+import 'create_tab.dart';
+import 'chat_tab.dart';
+import 'inbox_tab.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../Helper/colorPallets.dart';
+import '../../Helper/color_pallet.dart';
 
 class InboxMessage extends StatelessWidget with ColorPallets {
   final String title;

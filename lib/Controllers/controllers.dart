@@ -1,3 +1,3 @@
-export './uiController.dart';
-export './connectionController.dart';
+export 'ui_controller.dart';
+export './connection_controller.dart';
 export './account_controller.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../Helper/colorPallets.dart';
+import '../Helper/color_pallet.dart';
 import '../Widgets/widgets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'dart:async';

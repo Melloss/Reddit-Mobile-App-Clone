@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../Views/newChat.dart';
-import '../Helper/colorPallets.dart';
+import 'package:reddit_mobile_app_clone/services/auth_service.dart';
+import 'new_chat.dart';
+import '../Helper/color_pallet.dart';
 import '../Controllers/controllers.dart';
 
 class ChatTab extends StatefulWidget {

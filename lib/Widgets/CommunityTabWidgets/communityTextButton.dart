@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../Helper/colorPallets.dart';
+import '../../Helper/color_pallet.dart';
 import '../widgets.dart';
 
 class CommunityTextButton extends StatelessWidget with ColorPallets {

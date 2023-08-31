@@ -2,9 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:reddit_mobile_app_clone/Helper/colorPallets.dart';
+import 'package:reddit_mobile_app_clone/Helper/color_pallet.dart';
 import '../../Controllers/controllers.dart';
-import '../../Views/newChat.dart';
+import '../../Views/new_chat.dart';
 
 class BuildAppBar extends StatefulWidget implements PreferredSizeWidget {
   final String title;
@@ -37,9 +37,6 @@ class _BuildAppBarState extends State<BuildAppBar> with ColorPallets {
   @override
   build(BuildContext context) {
     return AppBar(
-      systemOverlayStyle: const SystemUiOverlayStyle(
-          statusBarColor: Colors.transparent,
-          statusBarIconBrightness: Brightness.dark),
       leadingWidth: 25,
       title: buildTitle(widget.title),
       elevation: widget.title == "Home" ? 1 : 0,

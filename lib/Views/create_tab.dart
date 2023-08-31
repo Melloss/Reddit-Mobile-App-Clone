@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import '../Helper/colorPallets.dart';
+import '../Helper/color_pallet.dart';
 
 class CreateTab extends StatefulWidget {
   const CreateTab({super.key});

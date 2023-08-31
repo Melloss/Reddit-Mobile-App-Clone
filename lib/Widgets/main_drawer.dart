@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../Helper/colorPallets.dart';
+import '../Helper/color_pallet.dart';
 import '../Controllers/account_controller.dart';
 
 class MainDrawer extends StatefulWidget {
@@ -11,8 +11,8 @@ class MainDrawer extends StatefulWidget {
 }
 
 class _MainDrawerState extends State<MainDrawer> with ColorPallets {
-  bool isExpanded = false;
   AccountController accountController = Get.find();
+  List<bool> isExpanded = [false, false, false];
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -28,23 +28,23 @@ class _MainDrawerState extends State<MainDrawer> with ColorPallets {
     );
   }
 
-  _buildExpansionTile(String title, List<Widget> children) {
+  _buildExpansionTile(String title, int index, List<Widget> children) {
     return ExpansionTile(
       controlAffinity: ListTileControlAffinity.trailing,
       maintainState: true,
       onExpansionChanged: (expanded) {
         if (expanded == true) {
           setState(() {
-            isExpanded = true;
+            isExpanded[index] = true;
           });
         } else {
           setState(() {
-            isExpanded = false;
+            isExpanded[index] = false;
           });
         }
       },
       trailing: Icon(
-        isExpanded == true
+        isExpanded[index] == true
             ? Icons.keyboard_arrow_down_outlined
             : Icons.keyboard_arrow_right_outlined,
       ),
@@ -76,7 +76,7 @@ class _MainDrawerState extends State<MainDrawer> with ColorPallets {
   }
 
   _buildModeratingExpansionTile() {
-    return _buildExpansionTile('Moderating', [
+    return _buildExpansionTile('Moderating', 1, [
       _buildListTile(
         title: 'Mod Feed',
         icon: Icons.event_note,
@@ -103,7 +103,7 @@ class _MainDrawerState extends State<MainDrawer> with ColorPallets {
   }
 
   _buildYourCommunityExpansionTile() {
-    return _buildExpansionTile('Your Community', [
+    return _buildExpansionTile('Your Community', 2, [
       _buildListTile(
         title: 'Create Community',
         icon: Icons.add,
@@ -159,7 +159,7 @@ class _MainDrawerState extends State<MainDrawer> with ColorPallets {
   }
 
   _buildRecentlyVisitedExpansionTile() {
-    return _buildExpansionTile('Recently Visited', [
+    return _buildExpansionTile('Recently Visited', 0, [
       _buildListTile(
         title: 'r/announcements',
         icon: Icons.reddit_outlined,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:reddit_mobile_app_clone/Helper/colorPallets.dart';
+import 'package:reddit_mobile_app_clone/Helper/color_pallet.dart';
 
 class NewChat extends StatefulWidget {
   const NewChat({super.key});
@@ -15,7 +15,6 @@ class _NewChatState extends State<NewChat> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        extendBody: true,
         backgroundColor: Colors.white,
         appBar: AppBar(
           leadingWidth: 25,

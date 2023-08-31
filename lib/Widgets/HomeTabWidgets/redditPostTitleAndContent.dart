@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../Helper/colorPallets.dart';
+import '../../Helper/color_pallet.dart';
 
 class RedditPostTitleAndContent extends StatefulWidget with ColorPallets {
   const RedditPostTitleAndContent({super.key});
