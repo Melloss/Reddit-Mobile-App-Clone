@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import '../Widgets/widgets.dart';
 import '/Views/login_signup.dart';
 import '../Helper/color_pallet.dart';
 import '../services/auth_service.dart';
@@ -76,7 +78,21 @@ class _LoginState extends State<Login> {
   }
 
   googleSignInHandler() async {
-    await AuthService().signInWithGoogle();
+    try {
+      await AuthService().signInWithGoogle();
+    } on FirebaseAuthException catch (error) {
+      redditSnackBar(
+        context: context,
+        message: error.message,
+        isHappy: false,
+      );
+    } catch (error) {
+      redditSnackBar(
+        context: context,
+        message: error.toString(),
+        isHappy: false,
+      );
+    }
   }
 
   emailSignInHandler() {

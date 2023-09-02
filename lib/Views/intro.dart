@@ -18,7 +18,7 @@ class _IntroState extends State<Intro> {
     connectionController.addconnectionListener();
     connectionController.dispose();
     Timer(const Duration(seconds: 3), () {
-      Get.to(() => const Login(), transition: Transition.zoom);
+      Get.off(() => const Login(), transition: Transition.zoom);
     });
     super.initState();
   }

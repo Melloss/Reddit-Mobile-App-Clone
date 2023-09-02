@@ -12,3 +12,4 @@ export './InboxTabWidgets/inboxNotification.dart';
 export './InboxTabWidgets/inboxMessage.dart';
 export './loading_animation.dart';
 export './main_drawer.dart';
+export './reddit_snackbar.dart';
