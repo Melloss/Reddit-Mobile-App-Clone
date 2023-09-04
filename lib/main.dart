@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:reddit_mobile_app_clone/Views/intro.dart';
+import './Views/intro.dart';
 import 'Helper/color_pallet.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart';

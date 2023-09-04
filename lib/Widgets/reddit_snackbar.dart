@@ -20,11 +20,11 @@ redditSnackBar({BuildContext? context, String? message, bool? isHappy}) {
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 5),
             width: MediaQuery.of(context).size.width * 0.8,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               color: Colors.white,
               border: Border(
                 left: BorderSide(
-                  color: Colors.red,
+                  color: isHappy! ? Colors.green : Colors.red,
                   width: 10,
                 ),
               ),
@@ -33,7 +33,7 @@ redditSnackBar({BuildContext? context, String? message, bool? isHappy}) {
               children: [
                 const SizedBox(width: 10),
                 Image.asset(
-                  isHappy!
+                  isHappy
                       ? 'assets/ic_toast_happy.png'
                       : 'assets/ic_toast_sad.png',
                   scale: 1,

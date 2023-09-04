@@ -1,6 +1,5 @@
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:reddit_mobile_app_clone/Widgets/widgets.dart';
 
 class AuthService {
   Future signInWithGoogle() async {

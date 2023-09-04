@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:get/get.dart';
-import 'login.dart';
+import 'login_google.dart';
 import '../Controllers/connection_controller.dart';
+import '../Widgets/widgets.dart' show LoadingAnimation;
 
 class Intro extends StatefulWidget {
   const Intro({super.key});
@@ -17,8 +18,8 @@ class _IntroState extends State<Intro> {
     ConnectionController connectionController = Get.find();
     connectionController.addconnectionListener();
     connectionController.dispose();
-    Timer(const Duration(seconds: 3), () {
-      Get.off(() => const Login(), transition: Transition.zoom);
+    Timer(const Duration(seconds: 4), () {
+      Get.off(() => const Login(), transition: Transition.rightToLeft);
     });
     super.initState();
   }
@@ -32,9 +33,14 @@ class _IntroState extends State<Intro> {
           width: 70,
           height: 70,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(50),
-              image: const DecorationImage(
-                  image: AssetImage('assets/reddit.png'), fit: BoxFit.cover)),
+            borderRadius: BorderRadius.circular(50),
+            image: const DecorationImage(
+                image: AssetImage('assets/reddit.png'), fit: BoxFit.cover),
+          ),
+          child: const Visibility(
+            visible: false,
+            child: LoadingAnimation(),
+          ),
         ),
       ),
     );

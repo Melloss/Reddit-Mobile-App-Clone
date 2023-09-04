@@ -93,11 +93,9 @@ class _MainDrawerState extends State<MainDrawer> with ColorPallets {
         title: 'Chat Queue',
         icon: Icons.chat_bubble_outline,
       ),
-      Obx(
-        () => _buildListTile(
-          title: accountController.accountUserName.value,
-          icon: Icons.reddit,
-        ),
+      _buildListTile(
+        title: accountController.getUsername(),
+        icon: Icons.reddit,
       ),
     ]);
   }

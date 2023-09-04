@@ -27,12 +27,10 @@ class _LoginSignupState extends State<LoginSignup> {
   bool isLogin = false;
   final _auth = FirebaseAuth.instance;
   bool isLoading = false;
-  GlobalKey<ScaffoldState> _key = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _key,
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
@@ -47,6 +45,8 @@ class _LoginSignupState extends State<LoginSignup> {
             onPressed: () {
               setState(() {
                 isLogin = !isLogin;
+                emailError = '';
+                passwordError = '';
               });
             },
             child: Text(isLogin == false ? 'Log in' : 'Sign up'),
@@ -72,7 +72,10 @@ class _LoginSignupState extends State<LoginSignup> {
               text: 'Continue with Google',
               onClick: () async {
                 try {
-                  await AuthService().signInWithGoogle();
+                  if (await AuthService().signInWithGoogle() != null) {
+                    Get.back();
+                    Get.off(() => const Home());
+                  }
                 } on FirebaseAuthException catch (error) {
                   redditSnackBar(
                     context: context,
@@ -219,7 +222,7 @@ class _LoginSignupState extends State<LoginSignup> {
                 child: const Text(
                   'Forgot Passoword',
                   style: TextStyle(
-                    color: Colors.red,
+                    color: Colors.blue,
                     fontSize: 15,
                   ),
                 ))
@@ -416,5 +419,12 @@ class _LoginSignupState extends State<LoginSignup> {
     setState(() {
       isLoading = false;
     });
+  }
+
+  @override
+  void dispose() {
+    emailCotroller.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 }

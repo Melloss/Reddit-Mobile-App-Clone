@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../Helper/color_pallet.dart';
 import '../../Controllers/controllers.dart';
 import 'package:get/get.dart';
+import '../Widgets/widgets.dart' show LoadingAnimation;
 
 class AccountDrawer extends StatefulWidget {
   const AccountDrawer({super.key});
@@ -13,6 +14,8 @@ class AccountDrawer extends StatefulWidget {
 class _AccountDrawerState extends State<AccountDrawer> with ColorPallets {
   late bool showMeOnline;
   ConnectionController connectionController = Get.find();
+  AccountController accountController = Get.find();
+  bool isLoading = false;
 
   Text status(bool online) {
     if (online == true) {
@@ -23,24 +26,39 @@ class _AccountDrawerState extends State<AccountDrawer> with ColorPallets {
         style: TextStyle(color: ColorPallets.iconColor));
   }
 
+  getAvatar() async {
+    setState(() {
+      isLoading = true;
+    });
+    await accountController.getAvatar();
+    setState(() {
+      isLoading = false;
+    });
+  }
+
   @override
   void initState() {
     showMeOnline = connectionController.connectedToInternet.value;
-
+    getAvatar();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      width: MediaQuery.of(context).size.width * 0.8,
       backgroundColor: Colors.white,
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
-          Flexible(
-            flex: 2,
-            child: Image.asset('assets/reddit_avatar.png'),
-          ),
+          isLoading ? const SizedBox(height: 50) : const SizedBox(height: 30),
+          isLoading
+              ? const LoadingAnimation()
+              : Obx(() => Flexible(
+                    flex: 2,
+                    child: Image.asset(
+                        'assets/avatars/${accountController.avatarLogo}'),
+                  )),
           Flexible(
             flex: 4,
             child: Column(children: [
@@ -65,7 +83,10 @@ class _AccountDrawerState extends State<AccountDrawer> with ColorPallets {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
-        children: const [Text("u/melloss12"), Icon(Icons.keyboard_arrow_down)],
+        children: [
+          Text("u/${accountController.getUsername()}"),
+          const Icon(Icons.keyboard_arrow_down)
+        ],
       ),
       onPressed: () {},
     );
@@ -192,7 +213,7 @@ class _AccountDrawerState extends State<AccountDrawer> with ColorPallets {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const Icon(Icons.check_circle_sharp, color: Colors.blue, size: 30),
+            Image.asset('assets/cake.png', scale: 1, width: 30),
             const SizedBox(width: 5),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

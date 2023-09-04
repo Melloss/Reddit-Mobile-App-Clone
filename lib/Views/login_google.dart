@@ -5,6 +5,7 @@ import '/Views/login_signup.dart';
 import '../Helper/color_pallet.dart';
 import '../services/auth_service.dart';
 import 'package:get/get.dart';
+import './home_tab.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -79,7 +80,9 @@ class _LoginState extends State<Login> {
 
   googleSignInHandler() async {
     try {
-      await AuthService().signInWithGoogle();
+      if (await AuthService().signInWithGoogle() != null) {
+        Get.off(() => const Home());
+      }
     } on FirebaseAuthException catch (error) {
       redditSnackBar(
         context: context,

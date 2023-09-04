@@ -1,8 +1,6 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:reddit_mobile_app_clone/Helper/color_pallet.dart';
+import '../../Helper/color_pallet.dart';
 import '../../Controllers/controllers.dart';
 import '../../Views/new_chat.dart';
 
@@ -23,6 +21,7 @@ class BuildAppBar extends StatefulWidget implements PreferredSizeWidget {
 class _BuildAppBarState extends State<BuildAppBar> with ColorPallets {
   UIController uiController = Get.find();
   ConnectionController connectionController = Get.find();
+  AccountController accountController = Get.find();
 
   _buildText(String text) {
     return Text(
@@ -105,7 +104,10 @@ class _BuildAppBarState extends State<BuildAppBar> with ColorPallets {
           maxRadius: 15,
           child: Obx(
             () => Stack(children: [
-              Image.asset('assets/reddit.png'),
+              Image.asset(
+                'assets/reddit.png',
+                fit: BoxFit.fill,
+              ),
               connectionController.connectedToInternet.value
                   ? Positioned(
                       bottom: 0,
